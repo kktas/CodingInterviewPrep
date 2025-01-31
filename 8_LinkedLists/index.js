@@ -37,9 +37,50 @@ class LinkedList {
         this.length++
         return this.length;
     }
+
+    print() {
+        const arr = new Array(this.length);
+        let current = this.head;
+        for (let i = 0; i < this.length; i++) {
+            arr[i] = current.value;
+            current = current.next;
+        }
+        console.log(arr);
+    }
+
+    insert(index, value) {
+        if (index < 0 || index > this.length) {
+            throw (new Error('Provided index is invalid!!'))
+        }
+
+        if (index === 0) {
+            this.prepend(value);
+        }
+        else {
+            let head = this.head;
+            let tail = head.next;
+
+            for (let i = 1; i < index; i++) {
+                head = head.next;
+                tail = head.next;
+            }
+
+            let newNode = new Node(value, tail);
+            head.next = newNode;
+            this.length++;
+        }
+    }
 }
 
-let linkedList = new LinkedList([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-let json = JSON.stringify(linkedList);
-
-console.log(json)
+let linkedList = new LinkedList([2, 3, 5, 6, 7, 8]);
+linkedList.print();
+linkedList.append(9);
+linkedList.print();
+linkedList.prepend(1);
+linkedList.print();
+linkedList.insert(3, 4);
+linkedList.print();
+linkedList.insert(0, 0);
+linkedList.print();
+linkedList.insert(10, 10);
+linkedList.print();
