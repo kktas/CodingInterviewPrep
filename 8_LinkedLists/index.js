@@ -7,24 +7,35 @@ class Node {
 
 class LinkedList {
     constructor(arr) {
-        if (!arr || !arr.length) {
-            this.head = null;
+        this.head = null;
+        this.tail = this.head;
+        this.length = 0;
+
+        if (!arr || !arr.length) return this;
+
+        for (let i = 0; i < arr.length; i++) {
+            this.append(arr[i])
+        }
+        return this;
+    }
+
+    append(value) {
+        if (this.length == 0) {
+            this.head = new Node(value);
             this.tail = this.head;
-            this.length = 0;
         }
         else {
-            this.head = new Node(arr[0])
-            this.tail = this.head;
-            this.length = 1;
-
-            for (let i = 1; i < arr.length; i++) {
-                this.tail.next = new Node(arr[i]);
-                this.tail = this.tail.next;
-                this.length++;
-            }
+            this.tail.next = new Node(value);
+            this.tail = this.tail.next;
         }
+        this.length++;
+        return this.length;
+    }
 
-        return this;
+    prepend(value) {
+        this.head = new Node(value, this.head);
+        this.length++
+        return this.length;
     }
 }
 
