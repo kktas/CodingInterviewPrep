@@ -57,18 +57,19 @@ class LinkedList {
             this.prepend(value);
         }
         else {
-            let head = this.head;
+            let head = this.getIndex(index - 1);
             let tail = head.next;
-
-            for (let i = 1; i < index; i++) {
-                head = head.next;
-                tail = head.next;
-            }
 
             let newNode = new Node(value, tail);
             head.next = newNode;
             this.length++;
         }
+    }
+
+    getIndex(index) {
+        let current = this.head;
+        for (let i = 0; i < index; i++) { current = current.next; }
+        return current;
     }
 }
 
