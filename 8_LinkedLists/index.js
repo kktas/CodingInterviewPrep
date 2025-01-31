@@ -66,6 +66,22 @@ class LinkedList {
         }
     }
 
+    remove(index) {
+        if (index < 0 || index > this.length - 1) {
+            throw new Error('Provided index is invalid!!');
+        }
+
+        if (index === 0) {
+            this.head = this.head.next;
+        }
+        else {
+            let head = this.getIndex(index - 1);
+            head.next = head.next.next;
+        }
+
+        this.length--;
+    }
+
     getIndex(index) {
         let current = this.head;
         for (let i = 0; i < index; i++) { current = current.next; }
@@ -84,4 +100,10 @@ linkedList.print();
 linkedList.insert(0, 0);
 linkedList.print();
 linkedList.insert(10, 10);
+linkedList.print();
+linkedList.remove(0);
+linkedList.print();
+linkedList.remove(9);
+linkedList.print();
+linkedList.remove(1);
 linkedList.print();
